@@ -1,3 +1,15 @@
-require "savon"
+require 'savon'
+require 'rake'
+require 'json'
+require 'net/http'
+require 'nokogiri'
 
-client = Savon.client(wsdl: ‘http://...../?wsdl')
+class Test
+  attr_reader :client
+
+  def initialize
+    @client = Savon.client(
+      wsdl: "https://rxnav.nlm.nih.gov/RxNormDBService.xml",
+    )
+  end
+end
