@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem "pry"
+gem "savon", "~> 2.0"
+gem "sinatra"
+gem "rake"
+gem "activerecord"
+gem "sinatra-activerecord"
+gem "sqlite3"
+gem "activerecord-suppress_range_error"
