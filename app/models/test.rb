@@ -13,3 +13,14 @@ class Test
     )
   end
 end
+
+# client = Test.new.client
+# drug = client.call
+#(:get_drugs, message: {name: "varenicline"})
+
+# arr = drug.body[:multiref]
+# arr[index][:rxcui] = number
+
+# find first array with cui key --> arr.find { |hash|
+# hash.find {|key, value| key == :cui}}
+# end
