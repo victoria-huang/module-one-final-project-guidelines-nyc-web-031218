@@ -60,7 +60,8 @@ class Prescription < ActiveRecord::Base
       Prescription.find_by(attributes)
     else
       puts "Thank you for adding a new drug!"
-      drug = Prescription.create(attributes) 
+      binding.pry
+      drug = Prescription.create(attributes)
       drug.set_rxcui_for_new_drug
       drug
     end
