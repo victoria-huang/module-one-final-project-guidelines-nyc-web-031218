@@ -12,17 +12,17 @@ def option_methods
 
     puts "Please enter the drug dosage (e.g., 10 mg): "
     drug_dosage = gets.strip.downcase
-    full_drug_name += drug_dosage
+    full_drug_name += " #{drug_dosage}"
 
     puts "Please enter the drug formulation (e.g., oral tablet)"
     drug_form = gets.strip.downcase
-    full_drug_name += drug_form
+    full_drug_name += " #{drug_form}"
 
     puts "Please enter the doctor's name:"
     doctor_name = gets.strip
 
-    patient.add_drug(full_drug_name, doctor_name)
-    menu
+    $patient.add_drug(full_drug_name, doctor_name)
+    option_methods
   when "2"
     patient.interactions = interactions_array
     #iterate through the interactions
@@ -44,4 +44,5 @@ def option_methods
    else
      puts "We found no interactions. Congrats!"
    end
+  end
  end
