@@ -1,5 +1,5 @@
-require_relative 'prescription'
-require_relative 'interaction'
+# require_relative 'prescription'
+# require_relative 'interaction'
 
 a = Prescription.create(name: "a", rxcui: 1)
 b = Prescription.create(name: "b", rxcui: 2)

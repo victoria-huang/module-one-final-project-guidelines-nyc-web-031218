@@ -51,6 +51,7 @@ GEM
     rack-protection (2.0.1)
       rack
     rake (12.3.1)
+    require_all (2.0.0)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -94,6 +95,7 @@ DEPENDENCIES
   nokogiri
   pry
   rake
+  require_all
   rest-client
   savon (~> 2.0)
   sinatra
