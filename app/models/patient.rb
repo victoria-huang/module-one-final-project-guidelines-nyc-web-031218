@@ -1,6 +1,7 @@
 class Patient < ActiveRecord::Base
   has_many :prescriptions
   has_many :doctors, through: :prescriptions
+  has_many :reminders
 
   def rxcui_array
     self.prescriptions.map{|prescription| prescription.rxcui}
@@ -31,4 +32,12 @@ class Patient < ActiveRecord::Base
     doctor = Doctor.find_by(name: doctor_name)
     Prescription.find_or_create_with_rxcui(name: drug_name, doctor: doctor, patient: self)
   end
+
+  def reminders
+    self.reminders.each_with_index{|note| puts "#{index+1} #{note}"}
+  end
+
+  def add_reminder(note)
+    Reminder.find_or_create_by(note: note, patient: self)
+  end 
 end
