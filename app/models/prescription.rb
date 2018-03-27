@@ -1,4 +1,4 @@
-require_relative 'interaction'
+# require_relative 'interaction'
 
 class Prescription < ActiveRecord::Base
   has_many :interactions

@@ -1,4 +1,4 @@
-require_relative 'prescription'
+# require_relative 'prescription'
 
 class Interaction < ActiveRecord::Base
   belongs_to :med1, class_name: "Prescription"
