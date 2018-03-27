@@ -1,18 +1,10 @@
 def methods
   response = menu
-case response 
-when "4"
+case response
 
-when "5"
-  puts "please enter your reminder:"
-  note = gets.strip
-  patient.add_reminder(note)
-  puts "thank you"
-  puts "would "
-  menu
 when "2"
     #iterate through the interactions
-    interactions_array = patient.interactions
+    interactions_array = $patient.interactions
     interactions_array.each {|hash|
       if hash[:severity] != "N/A"
         puts "We found this interaction: "
@@ -30,3 +22,16 @@ when "2"
    else
      puts "We found no interactions. Congrats!"
    end
+ when "3"
+   $patient.prescriptions.each_with_index{|pres| puts "#{index+1}. #{pres.name}"
+   puts }
+ when "4"
+ puts $patient.doctors.each_with_index{|doc| puts "#{index+1}. #{doc.name}"
+ when "5"
+   puts "please enter your reminder:"
+   note = gets.strip
+   $patient.add_reminder(note)
+   puts "thank you"
+   menu
+ when "6"
+   $patient.reminders.each_with_index{|note| puts "#{index+1}. #{note}"}

@@ -33,11 +33,7 @@ class Patient < ActiveRecord::Base
     Prescription.find_or_create_with_rxcui(name: drug_name, doctor: doctor, patient: self)
   end
 
-  def reminders
-    self.reminders.each_with_index{|note| puts "#{index+1} #{note}"}
-  end
-
   def add_reminder(note)
     Reminder.find_or_create_by(note: note, patient: self)
-  end 
+  end
 end
