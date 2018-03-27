@@ -28,7 +28,7 @@ class Patient < ActiveRecord::Base
   end
 
   def add_drug(drug_name, doctor_name)
-    doctor = Doctor.find_by(name: doctor_name)
+    doctor = Doctor.find_or_create_by(name: doctor_name)
     Prescription.find_or_create_with_rxcui(name: drug_name, doctor: doctor, patient: self)
   end
 end
