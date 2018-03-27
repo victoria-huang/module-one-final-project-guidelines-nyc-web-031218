@@ -28,10 +28,10 @@ end
       puts "\nPlease enter the doctor's name:\n\n"
       doctor_name = gets.strip
 
-      $patient.add_drug(full_drug_name, doctor_name)
+      @patient.add_drug(full_drug_name, doctor_name)
       option_methods
     when "2"
-      interactions_array = $patient.interactions
+      interactions_array = @patient.interactions
       #iterate through the interactions
       if interactions_array.length > 0
         interactions_array.each {|hash|
@@ -42,7 +42,7 @@ end
             if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
             puts "Please notify #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
             else
-              puts "Please notify doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+              puts "Please notify doctor(s) #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
             end
             # Prescription.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
           else
@@ -62,19 +62,20 @@ end
      end
      option_methods
    when "3"
-     $patient.prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
      option_methods
    when "4"
-     $patient.doctors.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.id}\n"}
+     @patient.doctors
+     @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n"}
      option_methods
    when "5"
      puts "\nplease enter your reminder:\n\n"
      note = gets.strip
-     $patient.add_reminder(note)
+     @patient.add_reminder(note)
      puts "\nthank you\n\n"
      option_methods
    when "6"
-     $patient.reminders.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
+     @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
      option_methods
    when "7"
      puts "\nGoodbye friend, thanks for checking in!"

@@ -2,7 +2,6 @@ class Patient < ActiveRecord::Base
   has_many :prescriptions
   has_many :doctors, through: :prescriptions
   has_many :reminders
-
   def rxcui_array
     self.prescriptions.map{|prescription| prescription.rxcui}
   end
@@ -29,7 +28,12 @@ class Patient < ActiveRecord::Base
   end
 
   def add_drug(drug_name, doctor_name)
-    doctor = Doctor.find_or_create_by(name: doctor_name)
+    if Doctor.find_by(name: doctor_name)
+      binding.pry
+      doctor = Doctor.find_by(name: doctor_name)
+    else
+      doctor = Doctor.create(name: doctor_name)
+    end
     Prescription.find_or_create_with_rxcui(name: drug_name, doctor: doctor, patient: self)
   end
 
