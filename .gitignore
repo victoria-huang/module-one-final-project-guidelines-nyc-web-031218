@@ -5,7 +5,8 @@ log
 node_modules
 out
 tmp
-
+app/models/interaction.rb
+db/migrate/20180326212213_create_interactions.rb
 *.iml
 *.log
 *.swp
