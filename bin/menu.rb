@@ -9,6 +9,7 @@ def menu
   puts "4. Get a list of all your doctors' names"
   puts "5. Create a reminder"
   puts "6. See all your reminders"
+  puts "7. Exit program"
 
   response = gets.strip
 end

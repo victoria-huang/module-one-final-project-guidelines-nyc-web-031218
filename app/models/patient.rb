@@ -16,8 +16,8 @@ class Patient < ActiveRecord::Base
 
       interactions_array = array_of_interactions.map {|interaction| hash = Hash.new
         hash[:description] = interaction["interactionPair"][0]["description"]
-        hash[:drug_1_rxcui] = interaction["interactionPair"][0]["interactionConcept"][0]["minConceptItem"]["rxcui"]
-        hash[:drug_2_rxcui] = interaction["interactionPair"][0]["interactionConcept"][1]["minConceptItem"]["rxcui"]
+        hash[:drug_1_name] = interaction["interactionPair"][0]["interactionConcept"][0]["minConceptItem"]["name"].downcase
+        hash[:drug_2_name] = interaction["interactionPair"][0]["interactionConcept"][1]["minConceptItem"]["name"].downcase
         hash[:severity] = interaction["interactionPair"][0]["severity"]
         hash
       }

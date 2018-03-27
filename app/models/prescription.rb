@@ -26,7 +26,7 @@ class Prescription < ActiveRecord::Base
   end
 
   def get_drug_rxcui
-    get_drug_info[:rxcui]
+    get_drug_info[:rxcui].to_i
   end
 
   # def get_drug_info(name)
@@ -60,7 +60,6 @@ class Prescription < ActiveRecord::Base
       Prescription.find_by(attributes)
     else
       puts "Thank you for adding a new drug!"
-      binding.pry
       drug = Prescription.create(attributes)
       drug.set_rxcui_for_new_drug
       drug
