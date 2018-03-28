@@ -17,7 +17,7 @@ class Prescription < ActiveRecord::Base
       #If the prescription doesn't exist, run validate_or_create to:
       #1. Call the drugs API
       #2. Check if this drug is a valid API call
-      #3. If it's a valid API call, then create it
+      #3. If it's a valid API call, then create Prescription instance
       #4. Associate the rxcui returned by the drug API with the new Prescription instance
       validate_or_create_drug(attributes)
     end
