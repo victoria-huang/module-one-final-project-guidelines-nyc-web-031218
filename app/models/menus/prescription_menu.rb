@@ -1,4 +1,4 @@
-require_relative '../config/environment'
+require_relative '../../../config/environment'
 
 def prescription_menu
   puts "\nWhat would you like to do?\n\n"

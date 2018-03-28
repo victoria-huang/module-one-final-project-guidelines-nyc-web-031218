@@ -1,4 +1,4 @@
-require_relative '../config/environment'
+require_relative '../../../config/environment'
 
 def reminder_menu
   puts "\nWhat would you like to do?\n\n"

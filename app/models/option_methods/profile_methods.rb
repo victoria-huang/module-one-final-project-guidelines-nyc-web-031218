@@ -1,6 +1,6 @@
-require_relative '../config/environment'
+require_relative '../../../config/environment'
 require_relative 'main_menu_methods'
-require_relative 'profile_menu'
+require_relative '../menus/profile_menu'
 
 def profile_methods
   case profile_menu

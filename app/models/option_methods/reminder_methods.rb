@@ -1,6 +1,6 @@
-require_relative '../config/environment'
+require_relative '../../../config/environment'
 require_relative 'main_menu_methods'
-require_relative 'reminder_menu'
+require_relative '../menus/reminder_menu'
 
 def reminder_methods
   case reminder_menu

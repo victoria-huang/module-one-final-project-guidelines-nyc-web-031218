@@ -1,4 +1,4 @@
-require_relative '../config/environment'
+require_relative '../../../config/environment'
 
 def main_menu
   puts "\nWhere would you like to go?\n\n"

@@ -1,5 +1,5 @@
-require_relative '../config/environment'
-require_relative 'main_menu'
+require_relative '../../../config/environment'
+require_relative '../menus/main_menu'
 require_relative 'prescription_methods'
 require_relative 'doctor_methods'
 require_relative 'reminder_methods'

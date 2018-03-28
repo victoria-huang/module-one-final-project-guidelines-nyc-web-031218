@@ -1,6 +1,6 @@
-require_relative '../config/environment'
+require_relative '../../../config/environment'
 require_relative 'main_menu_methods'
-require_relative 'doctor_menu'
+require_relative '../menus/doctor_menu'
 
 def doctor_methods
   case doctor_menu

@@ -12,7 +12,9 @@ ActiveRecord::Base.establish_connection(
 )
 
 require_all 'lib'
-Dir[File.join(File.dirname(__FILE__), "../app/models", "*.rb")].each {|f| require f}
+Dir[File.join(File.dirname(__FILE__), "../app/models/classes", "*.rb")].each {|f| require f}
+Dir[File.join(File.dirname(__FILE__), "../app/models/menus", "*.rb")].each {|f| require f}
+Dir[File.join(File.dirname(__FILE__), "../app/models/option_methods", "*.rb")].each {|f| require f}
 # require_relative '../app/models/prescription'
 # require_relative '../app/models/interaction'
 # require_relative '../app/models/seeds'
