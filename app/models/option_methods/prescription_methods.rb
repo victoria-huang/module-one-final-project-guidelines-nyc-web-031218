@@ -53,6 +53,20 @@ def prescription_methods
     sleep(1)
     prescription_methods
   when "3"
+    puts "\nHere all your prescription. Please type the number you would like to edit\n"
+    prescriptions = @patient.prescriptions.reload.uniq
+
+    prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+    drug_index = gets.strip.to_i - 1
+
+    if prescriptions[drug_index]
+      edit_prescription(prescriptions[drug_index])
+    else
+      puts "\nThat prescription does not exist in your records\n\n"
+      sleep(1)
+      prescription_methods
+    end
+  when "4"
     @patient.prescriptions.reload
     interactions_array = @patient.interactions
     #iterate through the interactions
@@ -91,19 +105,59 @@ def prescription_methods
      end
 
      prescription_methods
-  when "4"
+  when "5"
     @patient.prescriptions.reload
     puts "These are your current prescriptions:"
     sleep(1)
     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
     sleep(1)}
     prescription_methods
-  when "5"
+  when "6"
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-5\n"
+    puts "Please enter a number from 1-6\n"
     sleep(1)
     prescription_methods
   end
+end
+
+def edit_prescription(prescription)
+  puts "\nWhat would you like to edit?\n\n"
+  puts "1. Drug dosage and formulation"
+  puts "2. Doctor"
+
+  response = gets.strip
+
+  case response
+  when "1"
+    new_drug_name = prescription.name.split(" ")[0]
+
+    puts "\nPlease enter new drug dosage:\n\n"
+    dosage = gets.strip
+    new_drug_name += " #{dosage}"
+
+    puts "\nPlease enter new drug formulation:\n\n"
+    formulation = gets.strip
+    new_drug_name += " #{formulation}"
+
+    prescription.name = new_drug_name
+    prescription.save
+    puts "Drug dosage and formulation updated!\n\n"
+  when "2"
+    puts "\nPlease enter new doctor name: \n\n"
+    doctor_name = gets.strip
+    new_doctor = Doctor.find_or_create_by(name: doctor_name)
+    prescription.doctor = new_doctor
+    prescription.save
+    puts "Doctor name updated!\n\n"
+  else
+    puts "Sorry, that is an invalid response."
+    puts "Please enter a number from 1-2.\n\n"
+    sleep(1)
+    edit_prescription(prescription)
+  end
+
+  sleep(1)
+  prescription_methods
 end
