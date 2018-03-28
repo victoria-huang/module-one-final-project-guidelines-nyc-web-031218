@@ -18,6 +18,7 @@ GEM
       gyoku (>= 0.4.0)
       nokogiri
     arel (8.0.0)
+    bcrypt (3.1.11)
     builder (3.2.3)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
@@ -91,6 +92,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   activerecord-suppress_range_error
+  bcrypt
   json
   nokogiri
   pry
