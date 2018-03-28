@@ -1,5 +1,5 @@
-require_relative '../../config/environment'
-require_relative '../menu'
+require_relative '../../../config/environment'
+require_relative '../option_methods/main_menu_methods'
 
 def user_login_menu
   puts "Do you already have an account? (y/n)"
@@ -60,7 +60,7 @@ def choices_after_account_creation
   open_or_not = gets.strip.downcase
   case open_or_not
   when "y", "yes"
-    menu
+    main_menu_methods
   when "n", "no"
     puts "Thank you for creating an account. See you soon!"
   else
@@ -75,7 +75,7 @@ def password_authenticate
   password = gets.strip
   if @patient.authenticate(password)
     puts "Welcome #{@patient.name.split(" ")[0]}"
-   menu
+   main_menu_methods
   else
     puts "The password you entered is incorrect"
     puts "Please choose one:"
@@ -99,4 +99,3 @@ def validate_password_response
       validate_password_response
   end
 end
-user_login_menu
