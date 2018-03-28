@@ -10,11 +10,9 @@ def doctor_methods
     doctor_methods
   when "2"
     main_menu_methods
-  when "3"
-    puts "\nGoodbye friend, thanks for checking in!"
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-3\n"
+    puts "Please enter a number from 1-2\n"
     doctor_methods
   end
 end

@@ -22,11 +22,9 @@ def reminder_methods
     reminder_methods
   when "3"
     main_menu_methods
-  when "4"
-    puts "\nGoodbye friend, thanks for checking in!"
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-4\n"
+    puts "Please enter a number from 1-3\n"
     reminder_methods
   end
 end

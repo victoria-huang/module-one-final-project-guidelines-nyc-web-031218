@@ -87,11 +87,9 @@ def prescription_methods
     prescription_methods
   when "5"
     main_menu_methods
-  when "6"
-    puts "\nGoodbye friend, thanks for checking in!"
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-6\n"
+    puts "Please enter a number from 1-5\n"
     prescription_methods
   end
 end
