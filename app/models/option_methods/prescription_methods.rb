@@ -32,7 +32,7 @@ def prescription_methods
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
     drug_index = gets.strip.to_i - 1
 
-    if prescriptions[drug_index]
+    if check_string(drug_index) && prescriptions[drug_index]
       @patient.remove_drug(drug_index)
       prescriptions = @patient.prescriptions.reload.uniq
       puts "\nPrescription removed!\n"

@@ -21,10 +21,18 @@ def reminder_methods
     reminder_methods
   when "4"
     list_reminders
-    
+    puts "Please enter the number you would like to remove"
+    which_number_remove
   when "5"
-    puts "\nAre you sure you want to delete all you reminders? (y/n)"
-    del_response
+    @patient.reminders.reload
+    if @patient.reminders.count > 0
+      puts "\nAre you sure you want to delete all you reminders? (y/n)"
+      del_all_reminders_response
+    else
+      puts "You currently have no reminders\n"
+      sleep(1)
+      reminder_methods
+    end
   when "6"
     main_menu_methods
   else
@@ -42,11 +50,43 @@ def list_reminders
   @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n";
   sleep(1)}
   else
-    puts "You currently have no reminders"
+    puts "You currently have no reminders\n"
+    sleep(1)
+    reminder_methods
   end
 end
 
-def del_response
+def del_one_reminder_response(number)
+  response = gets.strip
+  case response
+   when "yes", "y"
+     Reminder.delete_by(number.to_i - 1)
+     sleep(0.5)
+     puts "Thank you, we have finished deleting your reminder\n"
+     sleep(0.5)
+   when "no", "n"
+     puts "ok"
+     sleep(1)
+   else
+     puts "That is not a valid response, please enter yes or no"
+     del_one_reminder_response
+   end
+    reminder_methods
+ end
+
+ def which_number_remove
+   number = gets.strip
+   if check_string(number) && @patient.reminders[number.to_i - 1]
+     puts "\nAre you sure you want to delete this reminder? (y/n)"
+     del_one_reminder_response(number)
+   else
+     puts "Invalid response, please enter a number from your list of reminders"
+     which_number_remove
+   end
+  end
+
+
+def del_all_reminders_response
   response = gets.strip
   case response
    when "yes", "y"
@@ -59,7 +99,7 @@ def del_response
      sleep(1)
    else
      puts "That is not a valid response, please enter yes or no"
-     del_response
+     del_all_reminders_response
    end
     reminder_methods
  end

@@ -5,6 +5,9 @@
 require 'bundler'
 Bundler.require
 
+def check_string(string)
+  string.scan(/\D/).empty?
+end
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
