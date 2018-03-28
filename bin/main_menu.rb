@@ -6,8 +6,8 @@ def main_menu
   puts "1. Prescriptions"
   puts "2. Doctors"
   puts "3. Reminders"
-  puts "4. Exit program\n\n"
+  puts "4. Profile"
+  puts "5. Exit program\n\n"
 
   response = gets.strip
 end
-# edit profile

@@ -1,8 +1,9 @@
 require_relative '../config/environment'
-require_relative 'menu'
+require_relative 'main_menu_methods'
+require_relative 'prescription_menu'
 
-def option_methods
-  case menu # VICKY: removed first if statement to check for invalid response (can include an "else" in case statements)
+def prescription_methods
+  case prescription_menu
   when "1"
     full_drug_name = ""
 
@@ -22,27 +23,29 @@ def option_methods
     doctor_name = gets.strip
 
     @patient.add_drug(full_drug_name, doctor_name)
-    option_methods
+    prescription_methods
   when "2"
     puts "\nHere all your prescription. Please type the number you would like to remove\n\n"
     prescriptions = @patient.prescriptions.reload.uniq
 
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
     drug_index = gets.strip.to_i - 1
+
     if prescriptions[drug_index]
-    @patient.remove_drug(drug_index)
-    prescriptions = @patient.prescriptions.reload.uniq
-    puts "Prescription removed"
-    if prescriptions.length > 0
-    puts "Here are your remaining prescriptions\n"
-    prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+      @patient.remove_drug(drug_index)
+      prescriptions = @patient.prescriptions.reload.uniq
+      puts "Prescription removed"
+      if prescriptions.length > 0
+        puts "Here are your remaining prescriptions\n"
+        prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+      else
+        puts "You have no remaining prescriptions in our records\n"
+      end
     else
-      puts "You have no remaining prescriptions in our records\n"
+      puts "\nThat prescription does not exist in your records\n\n"
     end
-  else
-    puts "\nThat prescription does not exist in your records\n\n"
-  end
-    option_methods
+
+    prescription_methods
   when "3"
     @patient.prescriptions.reload
     interactions_array = @patient.interactions
@@ -76,37 +79,19 @@ def option_methods
      else
        puts "\nWe found no interactions. Congrats!\n\n"
      end
-    option_methods
+
+     prescription_methods
   when "4"
     @patient.prescriptions.reload
     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
-    option_methods
+    prescription_methods
   when "5"
-    @patient.doctors.reload
-    @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n"}
-    option_methods
+    main_menu_methods
   when "6"
-    puts "\nPlease enter your reminder:\n\n"
-    note = gets.strip
-    # VICKY: remember to add menu/control options later!!!
-    if note == 'Q' || note =='q'
-      options_methods
-    else
-      @patient.add_reminder(note)
-      puts "\nThank you for adding a reminder!\n\n"
-    end
-
-    option_methods
-  when "7"
-    @patient.reminders.reload
-    @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
-    option_methods
-  when "8"
     puts "\nGoodbye friend, thanks for checking in!"
-    # return - VICKY: removed as it was not needed to exit the program (not calling function again anyways)
-else
-  puts "\nSorry, that is an invalid response."
-  puts "Please enter a number from 1-7\n"
-  option_methods
-end
+  else
+    puts "\nSorry, that is an invalid response."
+    puts "Please enter a number from 1-6\n"
+    prescription_methods
+  end
 end
