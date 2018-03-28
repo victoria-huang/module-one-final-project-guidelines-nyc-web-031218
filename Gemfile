@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-
+gem 'bcrypt'
 gem "pry"
 gem "savon", "~> 2.0"
 gem "sinatra"

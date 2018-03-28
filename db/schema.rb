@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327190143) do
+ActiveRecord::Schema.define(version: 20180328191045) do
 
   create_table "doctors", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20180327190143) do
 
   create_table "patients", force: :cascade do |t|
     t.string "name"
+    t.string "password_digest"
   end
 
   create_table "prescriptions", force: :cascade do |t|

@@ -1,8 +1,24 @@
+require 'bcrypt'
 class Patient < ActiveRecord::Base
+  has_secure_password
   has_many :prescriptions
   has_many :doctors, through: :prescriptions
   has_many :reminders
-  
+  #  attr_accessor :password
+  #  attr_accessible :name, :email, :password, :password_confirmation
+  #  validates :password, :presence => true, :on => :create, :confirmation => true, :length => {:within => 6..12}
+  #  before_save :encrypt_password
+  #
+  #  def has_password?(submitted_password)
+  #    self.encrypted_password == Password.create(submitted_password)
+  # end
+  # private
+  #
+  #   def encrypt_password(submitted_password)
+  #        self.encrypted_password = has_password?(submitted_password)
+  #    end
+  # end
+
   def rxcui_array
     self.prescriptions.map{|prescription| prescription.rxcui}
   end
