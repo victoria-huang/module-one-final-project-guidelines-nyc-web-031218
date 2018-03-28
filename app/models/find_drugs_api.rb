@@ -14,9 +14,6 @@ class FindDrugsApi
   end
 end
 
-
 # self.all.map{|prescription| prescription.rxcui}.join("+")
-#
-#
 # rxcui = drug.body[:multi_ref][2][:rxcui]
 # name = "varenicline 0.5 mg oral tablet"
