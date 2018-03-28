@@ -23,9 +23,10 @@ def prescription_methods
     doctor_name = gets.strip
 
     @patient.add_drug(full_drug_name, doctor_name)
+    sleep(1)
     prescription_methods
   when "2"
-    puts "\nHere all your prescription. Please type the number you would like to remove\n\n"
+    puts "\nHere all your prescription. Please type the number you would like to remove\n"
     prescriptions = @patient.prescriptions.reload.uniq
 
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
@@ -34,10 +35,14 @@ def prescription_methods
     if prescriptions[drug_index]
       @patient.remove_drug(drug_index)
       prescriptions = @patient.prescriptions.reload.uniq
-      puts "Prescription removed"
+      puts "\nPrescription removed!\n"
+      sleep(1)
+
       if prescriptions.length > 0
-        puts "Here are your remaining prescriptions\n"
-        prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+        puts "\nHere are your remaining prescriptions\n"
+        sleep(1)
+        prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
+        sleep(1)}
       else
         puts "You have no remaining prescriptions in our records\n"
       end
@@ -45,6 +50,7 @@ def prescription_methods
       puts "\nThat prescription does not exist in your records\n\n"
     end
 
+    sleep(1)
     prescription_methods
   when "3"
     @patient.prescriptions.reload
@@ -55,6 +61,7 @@ def prescription_methods
         if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0]
           if hash[:severity] != "N/A"
             puts "\nWe found this interaction:"
+            sleep(1)
             puts "#{hash[:description]}"
             puts "The severity of this interaction is #{hash[:severity]}."
             if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
@@ -65,6 +72,7 @@ def prescription_methods
             # Prescription.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
           else
             puts "\nWe found this interaction: "
+            sleep(1)
             puts "#{hash[:description]}"
             puts "The severity of this interaction is unknown by our database."
             #remember to store variables in yml
@@ -75,21 +83,27 @@ def prescription_methods
             end
           end
         end
+        sleep(5)
         }
      else
        puts "\nWe found no interactions. Congrats!\n\n"
+       sleep(2)
      end
 
      prescription_methods
   when "4"
     @patient.prescriptions.reload
-    @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+    puts "These are your current prescriptions:"
+    sleep(1)
+    @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
+    sleep(1)}
     prescription_methods
   when "5"
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
     puts "Please enter a number from 1-5\n"
+    sleep(1)
     prescription_methods
   end
 end

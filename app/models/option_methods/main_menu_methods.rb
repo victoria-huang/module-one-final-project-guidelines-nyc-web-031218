@@ -20,6 +20,7 @@ def main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
     puts "Please enter a number from 1-5\n"
+    sleep(1)
     main_menu_methods
   end
 end

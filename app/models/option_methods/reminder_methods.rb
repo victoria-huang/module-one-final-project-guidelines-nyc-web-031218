@@ -14,17 +14,21 @@ def reminder_methods
     @patient.add_reminder(note)
     puts "\nThank you for adding a reminder!\n\n"
     # end
-
+    sleep(1)
     reminder_methods
   when "2"
     @patient.reminders.reload
-    @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
+    puts "These are your current reminders:"
+    @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n";
+    sleep(1)}
+
     reminder_methods
   when "3"
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
     puts "Please enter a number from 1-3\n"
+    sleep(1)
     reminder_methods
   end
 end
