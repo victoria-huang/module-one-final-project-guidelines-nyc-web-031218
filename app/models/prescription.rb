@@ -1,5 +1,6 @@
 # require_relative 'interaction'
 require 'pry'
+
 class Prescription < ActiveRecord::Base
   belongs_to :doctor
   belongs_to :patient
@@ -56,10 +57,10 @@ class Prescription < ActiveRecord::Base
 
   def self.find_or_create_with_rxcui(attributes)
     if Prescription.find_by(attributes)
-      puts "You have already added this drug"
+      puts "\nYou have already added this drug\n\n"
       Prescription.find_by(attributes)
     else
-      puts "Thank you for adding a new drug!"
+      puts "\nThank you for adding a new drug!\n\n"
       drug = Prescription.create(attributes)
       drug.set_rxcui_for_new_drug
       drug
