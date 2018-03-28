@@ -31,6 +31,18 @@ end
       @patient.add_drug(full_drug_name, doctor_name)
       option_methods
     when "2"
+      puts "\nHere all your prescription. Please type the number you would like to remove\n\n"
+      prescriptions = @patient.prescriptions.reload.uniq
+      prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+      drug_index = gets.strip.to_i - 1
+      if prescriptions[drug_index]
+      @patient.remove_drug(drug_index)
+      prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
+      else
+        puts "\nThat prescription does not exist in your records\n\n"
+      end
+      option_methods
+    when "3"
       interactions_array = @patient.interactions
       #iterate through the interactions
       if interactions_array.length > 0
@@ -61,23 +73,25 @@ end
        puts "\nWe found no interactions. Congrats!\n\n"
      end
      option_methods
-   when "3"
-     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
-     option_methods
    when "4"
-     @patient.doctors
-     @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n"}
+     if @patient.prescriptions.reload.uniq.length == 0
+       puts "\n"
+     @patient.prescriptions.reload.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
      option_methods
    when "5"
+     @patient.doctors
+     @patient.doctors.reload.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n"}
+     option_methods
+   when "6"
      puts "\nplease enter your reminder:\n\n"
      note = gets.strip
      @patient.add_reminder(note)
      puts "\nthank you\n\n"
      option_methods
-   when "6"
+   when "7"
      @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
      option_methods
-   when "7"
+   when "8"
      puts "\nGoodbye friend, thanks for checking in!"
      return
    end

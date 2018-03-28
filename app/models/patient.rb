@@ -37,6 +37,10 @@ class Patient < ActiveRecord::Base
     Prescription.find_or_create_with_rxcui(name: drug_name, doctor: doctor, patient: self)
   end
 
+  def remove_drug(drug_index)
+    prescriptions = self.prescriptions.uniq
+    pres = Prescription.delete(prescriptions[drug_index].id)
+  end
   def add_reminder(note)
     Reminder.find_or_create_by(note: note, patient: self)
   end
