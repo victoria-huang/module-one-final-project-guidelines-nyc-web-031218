@@ -40,25 +40,27 @@ def option_methods
     #iterate through the interactions
     if interactions_array.length > 0
       interactions_array.each {|hash|
-        if hash[:severity] != "N/A"
-          puts "\nWe found this interaction:"
-          puts "#{hash[:description]}"
-          puts "The severity of this interaction is #{hash[:severity]}."
-          if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
-            puts "Please notify #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+        if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0]
+          if hash[:severity] != "N/A"
+            puts "\nWe found this interaction:"
+            puts "#{hash[:description]}"
+            puts "The severity of this interaction is #{hash[:severity]}."
+            if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
+              puts "Please consider notifying #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+            else
+              puts "Please consider notifying doctor(s) #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+            end
+            # Prescription.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
           else
-            puts "Please notify doctor(s) #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
-          end
-          # Prescription.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
-        else
-          puts "\nWe found this interaction: "
-          puts "#{hash[:description]}"
-          puts "The severity of this interaction is unknown by our database."
-          #remember to store variables in yml
-          if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
-            puts "Please notify doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
-          else
-            puts "Please notify doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+            puts "\nWe found this interaction: "
+            puts "#{hash[:description]}"
+            puts "The severity of this interaction is unknown by our database."
+            #remember to store variables in yml
+            if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
+              puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+            else
+              puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+            end
           end
         end
       }
@@ -75,10 +77,10 @@ def option_methods
     @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n"}
     option_methods
   when "5"
-    puts "\nplease enter your reminder:\n\n"
+    puts "\nPlease enter your reminder:\n\n"
     note = gets.strip
     @patient.add_reminder(note)
-    puts "\nthank you\n\n"
+    puts "\nThank you for adding a reminder!\n\n"
     option_methods
   when "6"
     @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
@@ -87,8 +89,8 @@ def option_methods
     puts "\nGoodbye friend, thanks for checking in!"
     # return - VICKY: removed as it was not needed to exit the program (not calling function again anyways)
   else
-    puts "\nIncorrect response"
-    puts "Please enter a number from 1-7\n\n"
+    puts "\nSorry, that is an invalid response."
+    puts "Please enter a number from 1-7\n"
     option_methods
   end
 end
