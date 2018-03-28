@@ -77,10 +77,16 @@ def option_methods
     @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n"}
     option_methods
   when "5"
-    puts "\nPlease enter your reminder:\n\n"
+    puts "\nPlease enter your reminder (or press 'Q' to return to menu):\n\n"
     note = gets.strip
-    @patient.add_reminder(note)
-    puts "\nThank you for adding a reminder!\n\n"
+
+    if note == 'Q' || note =='q'
+      options_methods
+    else
+      @patient.add_reminder(note)
+      puts "\nThank you for adding a reminder!\n\n"
+    end
+
     option_methods
   when "6"
     @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n"}
