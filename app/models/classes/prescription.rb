@@ -35,7 +35,8 @@ class Prescription < ActiveRecord::Base
       drug.set_rxcui_for_new_drug(client)
       drug
     else
-      puts "\nSorry, that is not a valid drug name!\n\n"
+      puts "\nSorry, we unfortunately do not track this medication in our database.
+      \nPlease check your spelling and try again.\n\n"
     end
   end
   #Third (condition)
