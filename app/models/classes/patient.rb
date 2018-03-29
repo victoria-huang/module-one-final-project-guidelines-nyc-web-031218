@@ -34,8 +34,9 @@ class Patient < ActiveRecord::Base
     else
       doctor = Doctor.create(name: doctor_name)
     end
-
     Prescription.find_or_create_with_rxcui(name: drug_name, doctor: doctor, patient: self)
+
+      self.prescriptions.reload
   end
 
   def remove_drug(drug_index)

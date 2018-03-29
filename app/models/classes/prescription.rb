@@ -44,7 +44,7 @@ class Prescription < ActiveRecord::Base
   #2. Validate if drug exists in API through the client
   def self.validate_drug(name, client)
     split_name = name.split(" ")[0]
-    client.call(:get_drugs, message: {name: split_name}).body[:multi_ref]
+    client.call(:get_drugs, message: {name: split_name}).body[:multi_ref] && Prescription.new(name: name).get_drug_info(client)
   end
   #Fourth
   #1. Calls get_drug_rxcui to retrieve rxcui associated with the drug from the client
@@ -59,7 +59,9 @@ class Prescription < ActiveRecord::Base
   #2. Uses rxcui key to obtain rxcui number (as a string)
   #3. Calls #to_i to transform string into an integer
   def get_drug_rxcui(client)
+    # if get_drug_info(client).length
     get_drug_info(client)[:rxcui].to_i
+  else
   end
   #Sixth
   #1. Get just the drug name (without dosage) from the Prescription instance

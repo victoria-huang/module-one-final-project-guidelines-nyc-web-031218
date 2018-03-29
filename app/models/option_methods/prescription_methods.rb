@@ -48,7 +48,8 @@ def add_a_prescription
   puts "\nPlease enter the generic drug name (e.g., ibuprofen): \n\n"
   drug_name = gets.strip.downcase
   full_drug_name += drug_name
-
+  client = FindDrugsAPI.new.client
+  if Prescription.validate_drug(drug_name, client)
   puts "\nPlease enter the drug dosage (e.g., 10 mg): \n\n"
   drug_dosage = gets.strip.downcase
   full_drug_name += " #{drug_dosage}"
@@ -59,10 +60,15 @@ def add_a_prescription
 
   puts "\nPlease enter the doctor's name:\n\n"
   doctor_name = gets.strip
-
   @patient.add_drug(full_drug_name, doctor_name)
-  continue?
-  prescription_methods
+    continue?
+    prescription_methods
+  else
+    puts "\nSorry, we unfortunately do not track this medication in our database.
+      \nPlease check your spelling and try again.\n\n"
+      continue?
+      prescription_methods
+  end
 end
 
 def remove_prescription

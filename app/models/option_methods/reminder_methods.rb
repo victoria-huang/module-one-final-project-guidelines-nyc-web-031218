@@ -16,13 +16,10 @@ def reminder_methods
     continue?
     reminder_methods
   when "3"
-    #add code here later
-    reminder_methods
-  when "4"
     list_reminders
     puts "\nPlease enter the number you would like to remove:\n"
     which_number_remove
-  when "5"
+  when "4"
     @patient.reminders.reload
     if @patient.reminders.count > 0
       puts "\nAre you sure you want to delete all your reminders? (y/n)"
@@ -33,7 +30,7 @@ def reminder_methods
       continue?
       reminder_methods
     end
-  when "6"
+  when "5"
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."

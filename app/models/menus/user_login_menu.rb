@@ -38,23 +38,45 @@ end
 
 def create_an_account
   puts "\nPlease enter a new username:"
+  puts "(must be between 5 and 20 characters)"
   name = gets.strip
 
-  if !Patient.find_by(name: name)
+  if !Patient.find_by(name: name) && name.length >= 5 && name.length <= 20
     @patient = Patient.create(name: name)
     @patient.save
     puts "\nHello, #{@patient.name.split(" ")[0]}"
     puts "Please choose a password:"
-      password = gets.strip
-      @patient.password = password
-      @patient.save
-    puts "\nThank you! Would you like to run the program now? (y/n)"
+    new_password_validate
+    puts "\nThank you! Would you like to log in now? (y/n)"
       choices_after_account_creation
+  elsif name.length < 5
+    puts "\nSorry, that's too short."
+    create_an_account
+  elsif name.length > 20
+    puts "\nSorry, that's too long."
+    create_an_account
   else
     puts "\nSorry, that username is taken."
     puts "You must choose a unique username."
     create_an_account
   end
+end
+
+def check_password_validity(password)
+  check_string_case(password) && check_string_empty(password) && check_include_integer(password) && check_string_special(password)
+end
+
+def new_password_validate
+  password = gets.strip
+  if check_password_validity(password)
+    @patient.password = password
+    @patient.save
+  else
+    puts "Invalid password. You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
+    puts "please enter a new password"
+    new_password_validate
+  end
+
 end
 
 def incorrect_login

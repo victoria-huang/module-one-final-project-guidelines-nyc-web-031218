@@ -9,15 +9,32 @@ def check_string_integer(string)
   string.scan(/\D/).empty?
 end
 
+def check_include_integer(string)
+  string.scan(/\d/).length > 0
+end
+def check_string_case(string)
+  string != string.downcase && string != string.upcase
+end
+
+def check_string_special(string)
+special = "?<>',?[]}{=-)(*&^%$#`~{}"
+regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
+string =~ regex
+end
+
 def check_string_empty(string)
 string != ""
 end
 
 def continue?
-  puts "Ready to continue? (press enter)"
+  puts "(press enter to continue)"
   gets
 end
 
+def continue_on
+  puts "(press enter to continue)"
+  gets
+end
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
   :database => "db/development.db"
