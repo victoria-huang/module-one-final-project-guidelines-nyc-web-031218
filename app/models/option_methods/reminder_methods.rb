@@ -17,8 +17,13 @@ def reminder_methods
     reminder_methods
   when "3"
     list_reminders
-    puts "\nPlease enter the number you would like to remove:\n"
-    which_number_remove
+    if @patient.reminders.length > 0
+      puts "\nPlease enter the number you would like to remove:\n"
+      which_number_remove
+    else
+      continue?
+      reminder_methods
+    end
   when "4"
     @patient.reminders.reload
     if @patient.reminders.count > 0
@@ -34,7 +39,7 @@ def reminder_methods
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-6\n\n"
+    puts "Please enter a number from 1-5\n\n"
     sleep(1)
     reminder_methods
   end
@@ -68,7 +73,7 @@ def del_one_reminder_response(number)
      reminder_methods
    else
      puts "\nInvalid response, please enter yes or no\n\n"
-     del_one_reminder_response
+     del_one_reminder_response(number)
    end
  end
 
