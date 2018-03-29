@@ -1,3 +1,4 @@
+'bundle install'
 require_relative '../config/environment'
 require_relative '../app/models/menus/user_login_menu'
 

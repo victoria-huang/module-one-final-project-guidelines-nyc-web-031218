@@ -14,7 +14,7 @@ string != ""
 end
 
 def continue?
-  puts "Ready to continue? (press enter)"
+  puts "\nReady to continue? (press enter)\n"
   gets
 end
 
