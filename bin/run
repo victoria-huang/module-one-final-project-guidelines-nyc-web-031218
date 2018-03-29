@@ -1,7 +1,10 @@
-puts "Please wait while we install dependencies"
-puts "...\n\n"
-`gem install bundler`
-`bundle install`
+if !(`gem list -i "^bcrypt$"`) && !(`gem list -i "^sinatra-activerecord$"`)
+  puts "Please wait while we install dependencies"
+  puts "...\n\n"
+  `gem install bundler`
+  `bundle install`
+end
+
 require_relative '../config/environment'
 require_relative '../app/models/menus/user_login_menu'
 
@@ -16,25 +19,3 @@ puts "have any interactions."
 puts "\nWe hope you enjoy using our app!\n"
 continue_on
 user_login_menu
-# puts "In the Prescriptions Menu, you can"
-# sleep(1.5)
-# puts "a) add new prescriptions, b) view existing prescriptions"
-# sleep(1.5)
-# puts "c) check if existing prescriptions interact harmfully,"
-# sleep(1.5)
-# puts "d) remove a prescription, e) edit an existing prescription.\n"
-# continue_on
-# puts "In the Doctors Menu, you can view a list of all your
-# doctors\n"
-# continue_on
-# puts "In the Reminders Menu, you can a) add a new reminder,"
-# sleep(1.5)
-# puts "b) view your existing reminders, c) remove a reminder,"
-# sleep(1.5)
-# puts "c) clear all your reminders"
-# continue_on
-# puts "In the Profile Menu, you can change your username
-# and password.\n\n"
-# sleep(1.5)
-
-# continue?
