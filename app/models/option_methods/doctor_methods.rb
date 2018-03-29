@@ -10,11 +10,12 @@ def doctor_methods
       puts "\nThese are your current doctors:"
       sleep(1)
       @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n";
-      sleep(1)}
+      sleep(0.5)}
+      continue?
       doctor_methods
     else
       puts "\nThere are currently no doctors on file!\n\n"
-      sleep(1)
+    continue?
       doctor_methods
     end
   when "2"

@@ -9,10 +9,11 @@ def reminder_methods
     note = gets.strip
     @patient.add_reminder(note)
     puts "\nThank you for adding a reminder!\n\n"
-    sleep(1)
+    continue?
     reminder_methods
   when "2"
     list_reminders
+    continue?
     reminder_methods
   when "3"
     #add code here later
@@ -24,11 +25,12 @@ def reminder_methods
   when "5"
     @patient.reminders.reload
     if @patient.reminders.count > 0
-      puts "\nAre you sure you want to delete all you reminders? (y/n)"
+      puts "\nAre you sure you want to delete all your reminders? (y/n)"
       del_all_reminders_response
     else
       puts "\nYou currently have no reminders!\n\n"
       sleep(1)
+      continue?
       reminder_methods
     end
   when "6"
@@ -50,7 +52,7 @@ def list_reminders
     sleep(1)}
   else
     puts "\nYou currently have no reminders!\n\n"
-    sleep(1)
+    sleep(0.5)
   end
 end
 
@@ -61,7 +63,7 @@ def del_one_reminder_response(number)
      Reminder.delete(Reminder.all[number.to_i - 1].id)
      sleep(0.5)
      puts "\nThank you, your reminder has been deleted.\n\n"
-     sleep(0.5)
+     continue?
      reminder_methods
    when "no", "n"
      puts "\nOkay, returning to Reminders Menu.\n\n"
@@ -92,7 +94,7 @@ def del_all_reminders_response
     Reminder.delete_all
     sleep(1)
     puts "Thank you, your reminders have been deleted.\n\n"
-    sleep(0.5)
+    continue?
     reminder_methods
   when "no", "n"
     puts "Okay, returning to Reminders Menu.\n\n"

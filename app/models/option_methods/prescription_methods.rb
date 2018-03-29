@@ -25,7 +25,7 @@ def prescription_methods
       end
     else
       puts "\nYou currently have no prescriptions!\n\n"
-      sleep(1)
+      continue?
       prescription_methods
     end
   when "4"
@@ -61,7 +61,7 @@ def add_a_prescription
   doctor_name = gets.strip
 
   @patient.add_drug(full_drug_name, doctor_name)
-  sleep(1)
+  continue?
   prescription_methods
 end
 
@@ -94,7 +94,7 @@ def remove_prescription
     prescription_methods
   else
     puts "\nYou currently have no prescriptions!\n\n"
-    sleep(1)
+    continue?
     prescription_methods
   end
 end
@@ -135,7 +135,7 @@ def edit_prescription(prescription)
     edit_prescription(prescription)
   end
 
-  sleep(1)
+  continue?
   prescription_methods
 end
 
@@ -170,13 +170,13 @@ def find_interactions
           end
         end
       end
-      sleep(7)
+
       }
    else
      puts "\nWe found no interactions. Congrats!\n\n"
-     sleep(2)
-   end
 
+   end
+   continue?
    prescription_methods
 end
 
@@ -186,11 +186,12 @@ def list_prescriptions
     puts "\nThese are your current prescriptions:"
     sleep(1)
     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
-    sleep(1)}
+    sleep(0.5)}
+    continue?
     prescription_methods
   else
     puts "\nYou currently have no prescriptions!\n\n"
-    sleep(1)
+    continue?
     prescription_methods
   end
 end
