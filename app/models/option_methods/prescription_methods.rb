@@ -170,7 +170,7 @@ def find_interactions
           end
         end
       end
-      sleep(5)
+      sleep(7)
       }
    else
      puts "\nWe found no interactions. Congrats!\n\n"
