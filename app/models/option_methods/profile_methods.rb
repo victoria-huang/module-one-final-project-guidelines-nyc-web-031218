@@ -75,7 +75,9 @@ def new_username_validate
   if new_username.length >= 5 && new_username.length <= 20
     @patient.name = new_username
     @patient.save
-    puts "\nUsername changed!\n"
+    puts "\nUsername changed!\n"  
+    sleep(1)
+    profile_methods
   elsif new_username.length < 5
     puts "\nSorry, that's too short."
     new_username_validate
@@ -83,7 +85,4 @@ def new_username_validate
     puts "\nSorry, that's too long."
     new_username_validate
   end
-  
-  sleep(1)
-  profile_methods
 end
