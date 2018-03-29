@@ -24,7 +24,7 @@ This program requires the following Ruby gems to be installed:
 bcrypt, pry, savon 2.0, sinatra, rake, activerecord, sinatra-activerecord, sqlite3,
 activerecord-suppress_range_error, json, nokogiri, rest-client, require_all
 
-To install the requirements necessary, navigate to the program's appropriate file
+To install the requirements necessary and run the program, navigate to the program's appropriate file
 directory in the command line terminal. Then, simply type "ruby bin/run.rb"
 
 # Contributing

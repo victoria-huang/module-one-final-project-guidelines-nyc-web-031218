@@ -61,7 +61,6 @@ class Prescription < ActiveRecord::Base
   def get_drug_rxcui(client)
     # if get_drug_info(client).length
     get_drug_info(client)[:rxcui].to_i
-  else
   end
   #Sixth
   #1. Get just the drug name (without dosage) from the Prescription instance

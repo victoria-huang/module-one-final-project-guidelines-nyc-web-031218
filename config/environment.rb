@@ -37,7 +37,7 @@ def continue_on
 end
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
-  :database => "db/development.db"
+  :database => "db/app.db"
 )
 
 require_all 'lib'
