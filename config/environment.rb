@@ -15,7 +15,7 @@ end
 
 def continue?
   puts "Ready to continue? (press enter)"
-  gets 
+  gets
 end
 
 ActiveRecord::Base.establish_connection(

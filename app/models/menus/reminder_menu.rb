@@ -9,5 +9,6 @@ def reminder_menu
   puts "4. Remove a reminder"
   puts "5. Clear all reminders"
   puts "6. Return to main menu\n\n"
+  
   response = gets.strip
 end

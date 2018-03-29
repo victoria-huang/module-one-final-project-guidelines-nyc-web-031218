@@ -4,20 +4,6 @@ class Patient < ActiveRecord::Base
   has_many :prescriptions
   has_many :doctors, through: :prescriptions
   has_many :reminders
-  #  attr_accessor :password
-  #  attr_accessible :name, :email, :password, :password_confirmation
-  #  validates :password, :presence => true, :on => :create, :confirmation => true, :length => {:within => 6..12}
-  #  before_save :encrypt_password
-  #
-  #  def has_password?(submitted_password)
-  #    self.encrypted_password == Password.create(submitted_password)
-  # end
-  # private
-  #
-  #   def encrypt_password(submitted_password)
-  #        self.encrypted_password = has_password?(submitted_password)
-  #    end
-  # end
 
   def rxcui_array
     self.prescriptions.map{|prescription| prescription.rxcui}
@@ -56,7 +42,23 @@ class Patient < ActiveRecord::Base
     prescriptions = self.prescriptions.uniq
     pres = Prescription.delete(prescriptions[drug_index].id)
   end
+
   def add_reminder(note)
     Reminder.find_or_create_by(note: note, patient: self)
   end
 end
+
+#  attr_accessor :password
+#  attr_accessible :name, :email, :password, :password_confirmation
+#  validates :password, :presence => true, :on => :create, :confirmation => true, :length => {:within => 6..12}
+#  before_save :encrypt_password
+#
+#  def has_password?(submitted_password)
+#    self.encrypted_password == Password.create(submitted_password)
+# end
+# private
+#
+#   def encrypt_password(submitted_password)
+#        self.encrypted_password = has_password?(submitted_password)
+#    end
+# end
