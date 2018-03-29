@@ -1,9 +1,5 @@
-if !(`gem list -i "^bcrypt$"`) && !(`gem list -i "^sinatra-activerecord$"`)
-  puts "Please wait while we install dependencies"
-  puts "...\n\n"
-  `gem install bundler`
-  `bundle install`
-end
+require_relative 'gemcheck'
+gemcheck
 
 require_relative '../config/environment'
 require_relative '../app/models/menus/user_login_menu'
