@@ -12,7 +12,7 @@ def prescription_methods
   when "3"
     prescriptions = @patient.prescriptions.reload.uniq
     if prescriptions.length > 0
-      puts "\nHere all your prescription. Please type the number you would like to edit\n"
+      puts "\nHere are all your prescriptions. Please type the number you would like to edit\n"
 
       prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
       drug_index = gets.strip
@@ -75,7 +75,7 @@ end
 def remove_prescription
   prescriptions = @patient.prescriptions.reload.uniq
   if prescriptions.length > 0
-    puts "\nHere all your prescription. Please type the number you would like to remove\n"
+    puts "\nHere are all your prescriptions. Please type the number you would like to remove\n"
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
     drug_index = gets.strip
 
