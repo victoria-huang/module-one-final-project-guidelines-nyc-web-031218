@@ -95,7 +95,8 @@ def password_authenticate
   puts "\nPlease enter your password:"
   password = gets.strip
   if @patient.authenticate(password)
-    puts "\nWelcome #{@patient.name.split(" ")[0]}"
+    sleep(0.5)
+    puts "\n\nWelcome #{@patient.name.split(" ")[0]}"
     main_menu_methods
   else
     puts "\nThe password you entered is incorrect"
