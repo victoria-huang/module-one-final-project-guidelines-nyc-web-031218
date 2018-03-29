@@ -24,7 +24,7 @@ def login
 end
 
 def login_to_account
-  puts "Please enter your username:"
+  puts "\nPlease enter your username:"
   name = gets.strip
 
   if Patient.find_by(name: name)
@@ -48,7 +48,7 @@ def create_an_account
     puts "Please choose a password:"
     new_password_validate
     puts "\nThank you! Would you like to log in now? (y/n)"
-      choices_after_account_creation
+    choices_after_account_creation
   elsif name.length < 5
     puts "\nSorry, that's too short."
     create_an_account
@@ -67,6 +67,9 @@ def check_password_validity(password)
 end
 
 def new_password_validate
+  puts  "You must include at least one:
+  \nspecial character, upper case letter, lower case letter, AND number"
+
   password = gets.strip
   puts "You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
   if check_password_validity(password)
@@ -74,10 +77,9 @@ def new_password_validate
     @patient.save
   else
     puts "Invalid password."
-    puts "please enter a new password"
+    puts "Please enter a new password.\n\n"
     new_password_validate
   end
-
 end
 
 def incorrect_login

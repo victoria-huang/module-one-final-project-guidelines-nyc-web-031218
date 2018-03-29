@@ -41,6 +41,8 @@ ActiveRecord::Base.establish_connection(
 )
 
 require_all 'lib'
+require_relative '../app/models/classes/find_drugs_api'
+require_relative '../app/models/classes/find_interactions_api'
 Dir[File.join(File.dirname(__FILE__), "../app/models/classes", "*.rb")].each {|f| require f}
 Dir[File.join(File.dirname(__FILE__), "../app/models/menus", "*.rb")].each {|f| require f}
 Dir[File.join(File.dirname(__FILE__), "../app/models/option_methods", "*.rb")].each {|f| require f}
