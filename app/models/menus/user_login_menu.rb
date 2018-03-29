@@ -24,7 +24,7 @@ def login
 end
 
 def login_to_account
-  puts "Please enter your username:"
+  puts "\nPlease enter your username:"
   name = gets.strip
 
   if Patient.find_by(name: name)
@@ -73,7 +73,7 @@ def new_password_validate
     @patient.save
   else
     puts "Invalid password. You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
-    puts "please enter a new password"
+    puts "Please enter a new password.\n\n"
     new_password_validate
   end
 

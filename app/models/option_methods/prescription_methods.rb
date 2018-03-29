@@ -1,6 +1,7 @@
 require_relative '../../../config/environment'
 require_relative 'main_menu_methods'
 require_relative '../menus/prescription_menu'
+require_relative '../classes/find_drugs_api'
 
 def prescription_methods
   case prescription_menu
@@ -48,7 +49,8 @@ def add_a_prescription
   puts "\nPlease enter the generic drug name (e.g., ibuprofen): \n\n"
   drug_name = gets.strip.downcase
   full_drug_name += drug_name
-  client = FindDrugsAPI.new.client
+  binding.pry
+  client = FindDrugsApi.new.client
   if Prescription.validate_drug(drug_name, client)
   puts "\nPlease enter the drug dosage (e.g., 10 mg): \n\n"
   drug_dosage = gets.strip.downcase
