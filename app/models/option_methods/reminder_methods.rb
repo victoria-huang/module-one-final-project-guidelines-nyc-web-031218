@@ -58,7 +58,7 @@ def del_one_reminder_response(number)
   response = gets.strip
   case response
    when "yes", "y"
-     Reminder.delete(number.to_i - 1)
+     Reminder.delete(Reminder.all[number.to_i - 1].id)
      sleep(0.5)
      puts "\nThank you, your reminder has been deleted.\n\n"
      sleep(0.5)

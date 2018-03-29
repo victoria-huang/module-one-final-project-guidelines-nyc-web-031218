@@ -6,7 +6,7 @@ require 'bundler'
 Bundler.require
 
 def check_string(string)
-  string.scan(/\D/).empty?
+  string.scan(/\D/m).empty?
 end
 
 ActiveRecord::Base.establish_connection(

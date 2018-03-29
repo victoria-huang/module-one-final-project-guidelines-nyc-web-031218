@@ -73,6 +73,7 @@ def remove_prescription
     drug_index = gets.strip
 
     if check_string(drug_index) && prescriptions[drug_index.to_i - 1]
+      binding.pry
       @patient.remove_drug(drug_index.to_i - 1)
       prescriptions = @patient.prescriptions.reload.uniq
       puts "\nPrescription removed!\n"
