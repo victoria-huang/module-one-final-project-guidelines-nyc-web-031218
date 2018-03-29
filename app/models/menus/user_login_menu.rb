@@ -12,30 +12,7 @@ def login
   case answer
   when "y",  "yes"
     puts "\nGreat!"
-    puts "Please enter your username:"
-    name = gets.strip
-
-    if Patient.find_by(name: name)
-      @patient = Patient.find_by(name: name)
-      password_authenticate
-    else
-      puts "\nThe account you entered doesn't exist."
-      puts "Please choose one:"
-      puts "1. Try again"
-      puts "2. Create a new account\n\n"
-
-      choice = gets.strip
-
-      case choice
-        when "1"
-          login(answer)
-          # VICKY: i'm getting this error here
-          # user_login_menu.rb:9:in `login': wrong number of arguments (given 1, expected 0)
-        when "2"
-          create_an_account
-        # VICKY: should add an else statement to capture invalid input
-      end
-    end
+    login_to_account
   when "n", "no"
     puts "\nOk, creating a new account is easy!"
     create_an_account
@@ -43,6 +20,19 @@ def login
     puts "\nInvalid response."
     puts "Please enter yes or no."
     login
+  end
+end
+
+def login_to_account
+  puts "Please enter your username:"
+  name = gets.strip
+
+  if Patient.find_by(name: name)
+    @patient = Patient.find_by(name: name)
+    password_authenticate
+  else
+    puts "\nThe account you entered doesn't exist."
+    incorrect_login
   end
 end
 
@@ -65,7 +55,25 @@ def create_an_account
     puts "You must choose a unique username."
     create_an_account
   end
+end
 
+def incorrect_login
+  puts "Please choose one:"
+  puts "1. Try again"
+  puts "2. Create a new account\n\n"
+
+  choice = gets.strip
+
+  case choice
+  when "1"
+    user_login_menu
+  when "2"
+    create_an_account
+  else
+    puts "\nInvalid response:"
+    puts "Please enter 1 or 2.\n\n"
+    incorrect_login
+  end
 end
 
 def choices_after_account_creation
