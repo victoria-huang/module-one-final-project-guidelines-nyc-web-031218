@@ -48,7 +48,7 @@ def create_an_account
     puts "Please choose a password:"
     new_password_validate
     puts "\nThank you! Would you like to log in now? (y/n)"
-      choices_after_account_creation
+    choices_after_account_creation
   elsif name.length < 5
     puts "\nSorry, that's too short."
     create_an_account
@@ -72,7 +72,8 @@ def new_password_validate
     @patient.password = password
     @patient.save
   else
-    puts "Invalid password. You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
+    puts "Invalid password. You must include at least one:
+    \nspecial character, upper case letter, lower case letter, AND number"
     puts "Please enter a new password.\n\n"
     new_password_validate
   end

@@ -17,7 +17,7 @@ def prescription_methods
       prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
       drug_index = gets.strip
 
-      if check_string(drug_index) && prescriptions[drug_index.to_i - 1]
+      if check_string_empty(drug_index) && prescriptions[drug_index.to_i - 1] && check_string_integer(drug_index)
         edit_prescription(prescriptions[drug_index.to_i - 1])
       else
         puts "\nThat prescription does not exist in your records\n\n"
@@ -49,7 +49,6 @@ def add_a_prescription
   puts "\nPlease enter the generic drug name (e.g., ibuprofen): \n\n"
   drug_name = gets.strip.downcase
   full_drug_name += drug_name
-  binding.pry
   client = FindDrugsApi.new.client
   if Prescription.validate_drug(drug_name, client)
   puts "\nPlease enter the drug dosage (e.g., 10 mg): \n\n"
@@ -80,8 +79,7 @@ def remove_prescription
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
     drug_index = gets.strip
 
-    if check_string(drug_index) && prescriptions[drug_index.to_i - 1]
-      binding.pry
+    if check_string_empty(drug_index) && prescriptions[drug_index.to_i - 1] && check_string_integer(drug_index)
       @patient.remove_drug(drug_index.to_i - 1)
       prescriptions = @patient.prescriptions.reload.uniq
       puts "\nPrescription removed!\n"
@@ -154,7 +152,19 @@ def find_interactions
   if interactions_array.length > 0
     interactions_array.each {|hash|
       if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0]
-        if hash[:severity] != "N/A"
+        if !hash.keys.include?(:severity)
+          binding.pry
+          puts "\nWe found this interaction: "
+          sleep(1)
+          puts "#{hash[:description]}"
+          puts "The severity of this interaction is unknown by our database."
+          #remember to store variables in yml
+          if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
+            puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+          else
+            puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+          end
+        elsif hash[:severity] != "N/A"
           puts "\nWe found this interaction:"
           sleep(1)
           puts "#{hash[:description]}"
@@ -177,15 +187,17 @@ def find_interactions
             puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
           end
         end
+      else
+        puts "\nWe found no interactions. Congrats!\n\n"
       end
-
       }
+    continue?
+    prescription_methods
    else
-     puts "\nWe found no interactions. Congrats!\n\n"
-
+    puts "\nWe found no interactions. Congrats!\n\n"
+    continue?
+    prescription_methods
    end
-   continue?
-   prescription_methods
 end
 
 def list_prescriptions
