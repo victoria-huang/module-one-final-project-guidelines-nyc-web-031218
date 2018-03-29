@@ -45,11 +45,11 @@ def create_an_account
     @patient.save
     puts "\nHello, #{@patient.name.split(" ")[0]}"
     puts "Please choose a password:"
-    password = gets.strip
-    @patient.password = password
-    @patient.save
+      password = gets.strip
+      @patient.password = password
+      @patient.save
     puts "\nThank you! Would you like to run the program now? (y/n)"
-    choices_after_account_creation
+      choices_after_account_creation
   else
     puts "\nSorry, that username is taken."
     puts "You must choose a unique username."
@@ -96,7 +96,7 @@ def password_authenticate
   password = gets.strip
   if @patient.authenticate(password)
     puts "\nWelcome #{@patient.name.split(" ")[0]}"
-   main_menu_methods
+    main_menu_methods
   else
     puts "\nThe password you entered is incorrect"
     puts "Please choose one:"
