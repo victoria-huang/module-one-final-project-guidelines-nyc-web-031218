@@ -72,8 +72,9 @@ def check_password_validity(password)
 end
 
 def new_password_validate
-  password = gets.strip
   puts "You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
+  password = gets.strip
+
   if check_password_validity(password)
     @patient.password = password
     @patient.save
