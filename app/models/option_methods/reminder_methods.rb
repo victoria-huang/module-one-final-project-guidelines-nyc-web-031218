@@ -7,17 +7,15 @@ def reminder_methods
   when "1"
     puts "\nPlease enter your reminder:\n\n"
     note = gets.strip
-    # # VICKY: remember to add menu/control options later!!!
-    # if note == 'Q' || note =='q'
-    #   options_methods
-    # else
     @patient.add_reminder(note)
     puts "\nThank you for adding a reminder!\n\n"
-    # end
     sleep(1)
     reminder_methods
   when "2"
     list_reminders
+    reminder_methods
+  when "3"
+    #add something here
     reminder_methods
   when "4"
     list_reminders
@@ -37,7 +35,7 @@ def reminder_methods
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-3\n"
+    puts "Please enter a number from 1-6\n"
     sleep(1)
     reminder_methods
   end
@@ -45,14 +43,14 @@ end
 
 def list_reminders
   @patient.reminders.reload
+
   if @patient.reminders.count > 0
-  puts "These are your current reminders:"
-  @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n";
-  sleep(1)}
+    puts "These are your current reminders:"
+    @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n";
+    sleep(1)}
   else
     puts "You currently have no reminders\n"
     sleep(1)
-    reminder_methods
   end
 end
 
@@ -60,18 +58,19 @@ def del_one_reminder_response(number)
   response = gets.strip
   case response
    when "yes", "y"
-     Reminder.delete_by(number.to_i - 1)
+     Reminder.delete(number.to_i - 1)
      sleep(0.5)
      puts "Thank you, we have finished deleting your reminder\n"
      sleep(0.5)
+     reminder_methods
    when "no", "n"
      puts "ok"
      sleep(1)
+     reminder_methods
    else
      puts "That is not a valid response, please enter yes or no"
      del_one_reminder_response
    end
-    reminder_methods
  end
 
  def which_number_remove
@@ -85,7 +84,6 @@ def del_one_reminder_response(number)
    end
   end
 
-
 def del_all_reminders_response
   response = gets.strip
   case response
@@ -94,12 +92,13 @@ def del_all_reminders_response
      sleep(1)
      puts "Thank you, we have finished deleting your reminders\n"
      sleep(0.5)
+     reminder_methods
    when "no", "n"
      puts "ok"
      sleep(1)
+     reminder_methods
    else
      puts "That is not a valid response, please enter yes or no"
      del_all_reminders_response
    end
-    reminder_methods
  end

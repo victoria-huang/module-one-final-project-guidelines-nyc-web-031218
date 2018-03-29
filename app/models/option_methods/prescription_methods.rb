@@ -14,10 +14,10 @@ def prescription_methods
       puts "\nHere all your prescription. Please type the number you would like to edit\n"
 
       prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
-      drug_index = gets.strip.to_i - 1
+      drug_index = gets.strip
 
-      if check_string(drug_index) && prescriptions[drug_index]
-        edit_prescription(prescriptions[drug_index])
+      if check_string(drug_index) && prescriptions[drug_index.to_i - 1]
+        edit_prescription(prescriptions[drug_index.to_i - 1])
       else
         puts "\nThat prescription does not exist in your records\n\n"
         sleep(1)
@@ -70,10 +70,10 @@ def remove_prescription
   if prescriptions.length > 0
     puts "\nHere all your prescription. Please type the number you would like to remove\n"
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
-    drug_index = gets.strip.to_i - 1
+    drug_index = gets.strip
 
-    if check_string(drug_index) && prescriptions[drug_index]
-      @patient.remove_drug(drug_index)
+    if check_string(drug_index) && prescriptions[drug_index.to_i - 1]
+      @patient.remove_drug(drug_index.to_i - 1)
       prescriptions = @patient.prescriptions.reload.uniq
       puts "\nPrescription removed!\n"
       sleep(1)

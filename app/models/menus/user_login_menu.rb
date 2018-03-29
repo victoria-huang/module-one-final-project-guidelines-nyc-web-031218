@@ -11,7 +11,7 @@ def login
     case answer
     when "y",  "yes"
         puts "Great!"
-        puts "Please enter your full name:"
+        puts "Please enter your username:"
         name = gets.strip
         if Patient.find_by(name: name)
           @patient = Patient.find_by(name: name)
