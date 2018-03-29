@@ -76,7 +76,7 @@ def del_one_reminder_response(number)
 
  def which_number_remove
    number = gets.strip
-   if check_string(number) && @patient.reminders[number.to_i - 1]
+   if check_string_empty(number) && check_string_integer(number) && @patient.reminders[number.to_i - 1]
      puts "\nAre you sure you want to delete this reminder? (y/n)"
      del_one_reminder_response(number)
    else

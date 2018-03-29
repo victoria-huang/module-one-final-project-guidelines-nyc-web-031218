@@ -24,7 +24,7 @@ def login
           choice = gets.strip
           case choice
             when "1"
-              login(answer)
+              login
             when "2"
               create_an_account
           end
