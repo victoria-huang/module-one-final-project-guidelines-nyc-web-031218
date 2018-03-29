@@ -5,12 +5,18 @@ require_relative '../menus/doctor_menu'
 def doctor_methods
   case doctor_menu
   when "1"
-    @patient.doctors.reload
-    puts "These are your current doctors:"
-    sleep(1)
-    @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n";
-    sleep(1)}
-    doctor_methods
+    doctors = @patient.doctors.reload
+    if doctors.length > 0
+      puts "These are your current doctors:"
+      sleep(1)
+      @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n";
+      sleep(1)}
+      doctor_methods
+    else
+      puts "There are currently no doctors on file!"
+      sleep(1)
+      doctor_methods
+    end
   when "2"
     main_menu_methods
   else
