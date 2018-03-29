@@ -151,40 +151,39 @@ def find_interactions
   #iterate through the interactions
   if interactions_array.length > 0
     interactions_array.each {|hash|
-      if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0]
+      if @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0] && @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0]
         if !hash.keys.include?(:severity)
-          binding.pry
           puts "\nWe found this interaction: "
           sleep(1)
           puts "#{hash[:description]}"
           puts "The severity of this interaction is unknown by our database."
           #remember to store variables in yml
-          if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
-            puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+          if @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
+            puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and  #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
           else
-            puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+            puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
           end
         elsif hash[:severity] != "N/A"
           puts "\nWe found this interaction:"
           sleep(1)
           puts "#{hash[:description]}"
           puts "The severity of this interaction is #{hash[:severity]}."
-          if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
-            puts "Please consider notifying #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+          if @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
+            puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
           else
-            puts "Please consider notifying doctor(s) #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+            puts "Please consider notifying doctor(s) #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
           end
-          # Prescription.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
+          # @patient.prescriptions.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
         else
           puts "\nWe found this interaction: "
           sleep(1)
           puts "#{hash[:description]}"
           puts "The severity of this interaction is unknown by our database."
           #remember to store variables in yml
-          if Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
-            puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{Prescription.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+          if @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
+            puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
           else
-            puts "Please consider notifying doctors #{Prescription.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+            puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
           end
         end
       else
