@@ -31,7 +31,8 @@ def login_to_account
     @patient = Patient.find_by(name: name)
     password_authenticate
   else
-    puts "\nThe account you entered doesn't exist."
+    sleep(0.5)
+    puts "\nThe account you entered doesn't exist.\n"
     incorrect_login
   end
 end
@@ -44,15 +45,19 @@ def create_an_account
   if !Patient.find_by(name: name) && name.length >= 5 && name.length <= 20
     @patient = Patient.create(name: name)
     @patient.save
-    puts "\nHello, #{@patient.name.split(" ")[0]}"
+    sleep(0.5)
+    puts "\nHello, #{@patient.name.split(" ")[0]}\n"
+    sleep(0.5)
     puts "Please choose a password:"
     new_password_validate
     puts "\nThank you! Would you like to log in now? (y/n)"
     choices_after_account_creation
   elsif name.length < 5
+    sleep(0.5)
     puts "\nSorry, that's too short."
     create_an_account
   elsif name.length > 20
+    sleep(0.5)
     puts "\nSorry, that's too long."
     create_an_account
   else
@@ -67,9 +72,6 @@ def check_password_validity(password)
 end
 
 def new_password_validate
-  puts  "You must include at least one:
-  \nspecial character, upper case letter, lower case letter, AND number"
-
   password = gets.strip
   puts "You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
   if check_password_validity(password)
