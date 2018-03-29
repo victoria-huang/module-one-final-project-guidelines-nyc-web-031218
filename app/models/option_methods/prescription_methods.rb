@@ -174,12 +174,11 @@ def find_interactions
 
       else
          boolean = true
-        # puts "\nWe found no interactions. Congrats!\n\n"
       end
       }
     if boolean && !boolean1
       puts "\nWe found no interactions. Congrats!\n\n"
-    end 
+    end
     continue?
     prescription_methods
    else
@@ -197,9 +196,9 @@ def message_if_unknown(hash)
 end
 def interaction_message(hash)
   if @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor != @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor
-    puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
+    puts "Please consider notifying doctor(s) #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name} and #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0].doctor.name}\n\n"
   else
-    puts "Please consider notifying doctors #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
+    puts "Please consider notifying doctor(s) #{@patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0].doctor.name}"
   end
 end
 

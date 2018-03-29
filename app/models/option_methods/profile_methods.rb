@@ -23,12 +23,7 @@ def check_to_change_password
   password = gets.strip
 
   if @patient.authenticate(password)
-    puts "\nPlease enter a new password:"
-    new_password_validate
-
-    puts "\nPassword changed!\n"
-    sleep(1)
-    profile_methods
+    change_password_validate
   else
     puts "\nThe password you entered is incorrect.\n"
     sleep(1)
@@ -38,8 +33,8 @@ end
 
 def check_to_change_username
   puts "\nPlease enter your current password:"
-  password = gets.strip
 
+  password = gets.strip
   if @patient.authenticate(password)
     new_username_validate
   else
@@ -49,33 +44,36 @@ def check_to_change_username
   end
 end
 
-def check_password_validity(password)
+def check_password_valid(password)
   check_string_case(password) && check_string_empty(password) && check_include_integer(password) && check_string_special(password)
 end
 
-def new_password_validate
-  puts  "You must include at least one:
-  \nspecial character, upper case letter, lower case letter, AND number"
+def change_password_validate
+  puts "\nPlease enter a new password."
+  puts "You must include at least one:"
+  puts "special character, upper case letter, lower case letter, AND number\n\n"
+  new_password = gets.strip
 
-  password = gets.strip
-  if check_password_validity(password)
-    @patient.password = password
+  if check_password_valid(new_password)
+    @patient.password = new_password
     @patient.save
+    puts "\nPassword changed!\n"
+    sleep(1)
+    profile_methods
   else
     puts "Invalid password."
-    puts "Please enter a new password.\n\n"
-    new_password_validate
+    change_password_validate
   end
 end
 
 def new_username_validate
-  puts "\nPlease enter a new username between 5 and 20 characters:"
+  puts "Please enter a new username between 5 and 20 characters:"
   new_username = gets.strip
 
   if new_username.length >= 5 && new_username.length <= 20
     @patient.name = new_username
     @patient.save
-    puts "\nUsername changed!\n"  
+    puts "\nUsername changed!\n"
     sleep(1)
     profile_methods
   elsif new_username.length < 5

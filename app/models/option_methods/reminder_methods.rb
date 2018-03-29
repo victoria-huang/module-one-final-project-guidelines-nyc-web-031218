@@ -59,7 +59,7 @@ def list_reminders
 end
 
 def del_one_reminder_response(number)
-  response = gets.strip
+  response = gets.strip.downcase
   case response
    when "yes", "y"
      Reminder.delete(Reminder.all[number.to_i - 1].id)
@@ -90,7 +90,7 @@ def del_one_reminder_response(number)
 
 
 def del_all_reminders_response
-  response = gets.strip
+  response = gets.strip.downcase
   case response
   when "yes", "y"
     Reminder.delete_all
