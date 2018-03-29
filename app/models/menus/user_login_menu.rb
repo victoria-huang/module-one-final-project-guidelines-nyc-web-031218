@@ -3,11 +3,11 @@ require_relative '../option_methods/main_menu_methods'
 
 def user_login_menu
   puts "Do you already have an account? (y/n)"
-  answer = gets.strip.downcase
-  login(answer)
+  login
 end
 
-def login(answer)
+def login
+    answer = gets.strip.downcase
     case answer
     when "y",  "yes"
         puts "Great!"
@@ -24,7 +24,7 @@ def login(answer)
           choice = gets.strip
           case choice
             when "1"
-              login(answer)
+              login
             when "2"
               create_an_account
           end
@@ -32,6 +32,10 @@ def login(answer)
       when "n", "no"
         puts "Ok, creating a new account is easy!"
         create_an_account
+      else
+        puts "Invalid response:"
+        puts "please enter yes or no"
+        login
       end
     end
 

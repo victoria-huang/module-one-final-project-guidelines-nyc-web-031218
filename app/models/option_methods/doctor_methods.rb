@@ -9,7 +9,8 @@ def doctor_methods
     puts "These are your current doctors:"
     sleep(1)
     @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n";
-    sleep(1)}
+    sleep(0.5)}
+    continue?
     doctor_methods
   when "2"
     main_menu_methods

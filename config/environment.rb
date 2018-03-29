@@ -5,6 +5,18 @@
 require 'bundler'
 Bundler.require
 
+def check_string_integer(string)
+  string.scan(/\D/).empty?
+end
+
+def check_string_empty(string)
+string != ""
+end
+
+def continue?
+  puts "Ready to continue? (press enter)"
+  gets 
+end
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",

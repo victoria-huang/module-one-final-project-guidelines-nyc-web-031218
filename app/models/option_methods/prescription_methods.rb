@@ -23,16 +23,16 @@ def prescription_methods
     doctor_name = gets.strip
 
     @patient.add_drug(full_drug_name, doctor_name)
-    sleep(1)
+    sleep(0.5)
     prescription_methods
   when "2"
-    puts "\nHere all your prescription. Please type the number you would like to remove\n"
+    puts "\nHere are all your prescriptions. Please type the number you would like to remove\n"
     prescriptions = @patient.prescriptions.reload.uniq
 
     prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n"}
     drug_index = gets.strip.to_i - 1
 
-    if prescriptions[drug_index]
+    if check_string_empty(drug_index) && check_string_integer(drug_index) && prescriptions[drug_index]
       @patient.remove_drug(drug_index)
       prescriptions = @patient.prescriptions.reload.uniq
       puts "\nPrescription removed!\n"
@@ -42,15 +42,14 @@ def prescription_methods
         puts "\nHere are your remaining prescriptions\n"
         sleep(1)
         prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
-        sleep(1)}
+        sleep(0.5) }
       else
         puts "You have no remaining prescriptions in our records\n"
       end
     else
       puts "\nThat prescription does not exist in your records\n\n"
     end
-
-    sleep(1)
+    continue?
     prescription_methods
   when "3"
     puts "\nHere all your prescription. Please type the number you would like to edit\n"
@@ -97,11 +96,11 @@ def prescription_methods
             end
           end
         end
-        sleep(5)
+        continue?
         }
      else
        puts "\nWe found no interactions. Congrats!\n\n"
-       sleep(2)
+       continue?
      end
 
      prescription_methods
@@ -110,7 +109,8 @@ def prescription_methods
     puts "These are your current prescriptions:"
     sleep(1)
     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
-    sleep(1)}
+    sleep(0.5)}
+    continue?
     prescription_methods
   when "6"
     main_menu_methods

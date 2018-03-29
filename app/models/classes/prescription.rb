@@ -21,6 +21,7 @@ class Prescription < ActiveRecord::Base
       #4. Associate the rxcui returned by the drug API with the new Prescription instance
       validate_or_create_drug(attributes)
     end
+    continue?
   end
   #Second
   def self.validate_or_create_drug(attributes)
