@@ -146,6 +146,7 @@ def edit_prescription(prescription)
 end
 
 def find_interactions
+  interaction_counter = 1
   boolean = false
   boolean1 = false
   @patient.prescriptions.reload
@@ -156,22 +157,22 @@ def find_interactions
       if @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_1_name]}%")[0] && @patient.prescriptions.where('name LIKE ?', "%#{hash[:drug_2_name]}%")[0]
         boolean1 = true
         if !hash.keys.include?(:severity)
-          message_if_unknown(hash)
+          message_if_unknown(hash, interaction_counter)
           #remember to store variables in yml
           interaction_message(hash)
         elsif hash[:severity] != "N/A"
-          puts "\nWe found this interaction:"
+          puts "\n#{interaction_counter}. We found this interaction:"
           sleep(1)
           puts "#{hash[:description]}"
           puts "The severity of this interaction is #{hash[:severity]}."
           interaction_message(hash)
           # @patient.prescriptions.find_by(rxcui: hash[:drug_1_rxcui]).doctor.name
         else
-          message_if_unknown(hash)
+          message_if_unknown(hash, interaction_counter)
           #remember to store variables in yml
           interaction_message(hash)
         end
-
+        interaction_counter += 1
       else
          boolean = true
       end
@@ -188,8 +189,8 @@ def find_interactions
    end
 end
 
-def message_if_unknown(hash)
-  puts "\nWe found this interaction: "
+def message_if_unknown(hash, interaction_counter)
+  puts "\n#{interaction_counter}. We found this interaction: "
   sleep(1)
   puts "#{hash[:description]}"
   puts "The severity of this interaction is unknown by our database."
