@@ -73,32 +73,32 @@ def del_one_reminder_response(number)
    end
  end
 
- def which_number_remove
-   number = gets.strip
-   if check_string(number) && @patient.reminders[number.to_i - 1]
-     puts "\nAre you sure you want to delete this reminder? (y/n)"
-     del_one_reminder_response(number)
-   else
-     puts "\nInvalid response, please enter a number from your list of reminders\n\n"
-     which_number_remove
-   end
+def which_number_remove
+  number = gets.strip
+  if check_string(number) && @patient.reminders[number.to_i - 1]
+    puts "\nAre you sure you want to delete this reminder? (y/n)"
+    del_one_reminder_response(number)
+  else
+    puts "\nInvalid response, please enter a number from your list of reminders\n\n"
+    which_number_remove
   end
+end
 
 def del_all_reminders_response
   response = gets.strip
   case response
-   when "yes", "y"
-     Reminder.delete_all
-     sleep(1)
-     puts "Thank you, your reminders have been deleted.\n\n"
-     sleep(0.5)
-     reminder_methods
-   when "no", "n"
-     puts "Okay, returning to Reminders Menu.\n\n"
-     sleep(1)
-     reminder_methods
-   else
-     puts "Invalid response, please enter yes or no\n\n"
-     del_all_reminders_response
-   end
+  when "yes", "y"
+    Reminder.delete_all
+    sleep(1)
+    puts "Thank you, your reminders have been deleted.\n\n"
+    sleep(0.5)
+    reminder_methods
+  when "no", "n"
+    puts "Okay, returning to Reminders Menu.\n\n"
+    sleep(1)
+    reminder_methods
+  else
+    puts "Invalid response, please enter yes or no\n\n"
+    del_all_reminders_response
+  end
  end
