@@ -67,17 +67,18 @@ def check_password_validity(password)
 end
 
 def new_password_validate
+  puts  "You must include at least one:
+  \nspecial character, upper case letter, lower case letter, AND number"
+
   password = gets.strip
   if check_password_validity(password)
     @patient.password = password
     @patient.save
   else
-    puts "Invalid password. You must include at least one:
-    \nspecial character, upper case letter, lower case letter, AND number"
+    puts "Invalid password."
     puts "Please enter a new password.\n\n"
     new_password_validate
   end
-
 end
 
 def incorrect_login
