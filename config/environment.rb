@@ -17,7 +17,7 @@ def check_string_case(string)
 end
 
 def check_string_special(string)
-special = "?<>',?[]}{=-)(*&^%$#`~{}"
+special = "!@?<>',?[]}{=-)(*&^%$#`~{}"
 regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
 string =~ regex
 end
