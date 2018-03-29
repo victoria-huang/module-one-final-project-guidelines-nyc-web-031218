@@ -15,11 +15,11 @@ def reminder_methods
     list_reminders
     reminder_methods
   when "3"
-    #add something here
+    #add code here later
     reminder_methods
   when "4"
     list_reminders
-    puts "Please enter the number you would like to remove"
+    puts "\nPlease enter the number you would like to remove:\n"
     which_number_remove
   when "5"
     @patient.reminders.reload
@@ -27,7 +27,7 @@ def reminder_methods
       puts "\nAre you sure you want to delete all you reminders? (y/n)"
       del_all_reminders_response
     else
-      puts "You currently have no reminders\n"
+      puts "\nYou currently have no reminders!\n\n"
       sleep(1)
       reminder_methods
     end
@@ -35,7 +35,7 @@ def reminder_methods
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-6\n"
+    puts "Please enter a number from 1-6\n\n"
     sleep(1)
     reminder_methods
   end
@@ -45,11 +45,11 @@ def list_reminders
   @patient.reminders.reload
 
   if @patient.reminders.count > 0
-    puts "These are your current reminders:"
+    puts "\nThese are your current reminders:"
     @patient.reminders.uniq.each_with_index{|reminder, index| puts "\n#{index+1}. #{reminder.note}\n";
     sleep(1)}
   else
-    puts "You currently have no reminders\n"
+    puts "\nYou currently have no reminders!\n\n"
     sleep(1)
   end
 end
@@ -60,15 +60,15 @@ def del_one_reminder_response(number)
    when "yes", "y"
      Reminder.delete(number.to_i - 1)
      sleep(0.5)
-     puts "Thank you, we have finished deleting your reminder\n"
+     puts "\nThank you, your reminder has been deleted.\n\n"
      sleep(0.5)
      reminder_methods
    when "no", "n"
-     puts "ok"
+     puts "\nOkay, returning to Reminders Menu.\n\n"
      sleep(1)
      reminder_methods
    else
-     puts "That is not a valid response, please enter yes or no"
+     puts "\nInvalid response, please enter yes or no\n\n"
      del_one_reminder_response
    end
  end
@@ -79,7 +79,7 @@ def del_one_reminder_response(number)
      puts "\nAre you sure you want to delete this reminder? (y/n)"
      del_one_reminder_response(number)
    else
-     puts "Invalid response, please enter a number from your list of reminders"
+     puts "\nInvalid response, please enter a number from your list of reminders\n\n"
      which_number_remove
    end
   end
@@ -90,15 +90,15 @@ def del_all_reminders_response
    when "yes", "y"
      Reminder.delete_all
      sleep(1)
-     puts "Thank you, we have finished deleting your reminders\n"
+     puts "Thank you, your reminders have been deleted.\n\n"
      sleep(0.5)
      reminder_methods
    when "no", "n"
-     puts "ok"
+     puts "Okay, returning to Reminders Menu.\n\n"
      sleep(1)
      reminder_methods
    else
-     puts "That is not a valid response, please enter yes or no"
+     puts "Invalid response, please enter yes or no\n\n"
      del_all_reminders_response
    end
  end

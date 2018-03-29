@@ -7,54 +7,62 @@ def user_login_menu
 end
 
 def login
-    answer = gets.strip.downcase
-    case answer
-    when "y",  "yes"
-        puts "Great!"
-        puts "Please enter your username:"
-        name = gets.strip
-        if Patient.find_by(name: name)
-          @patient = Patient.find_by(name: name)
-          password_authenticate
-        else
-          puts "The account you entered doesn't exist."
-          puts "Please choose one:\n"
-          puts "1: Try again\n"
-          puts "2: Create a new account\n"
-          choice = gets.strip
-          case choice
-            when "1"
-              login(answer)
-            when "2"
-              create_an_account
-          end
-        end
-      when "n", "no"
-        puts "Ok, creating a new account is easy!"
-        create_an_account
-      else
-        puts "Invalid response:"
-        puts "please enter yes or no"
-        login
+  answer = gets.strip.downcase
+
+  case answer
+  when "y",  "yes"
+    puts "\nGreat!"
+    puts "Please enter your username:"
+    name = gets.strip
+
+    if Patient.find_by(name: name)
+      @patient = Patient.find_by(name: name)
+      password_authenticate
+    else
+      puts "\nThe account you entered doesn't exist."
+      puts "Please choose one:"
+      puts "1. Try again"
+      puts "2. Create a new account\n\n"
+
+      choice = gets.strip
+
+      case choice
+        when "1"
+          login(answer)
+          # VICKY: i'm getting this error here
+          # user_login_menu.rb:9:in `login': wrong number of arguments (given 1, expected 0)
+        when "2"
+          create_an_account
+        # VICKY: should add an else statement to capture invalid input
       end
     end
+  when "n", "no"
+    puts "\nOk, creating a new account is easy!"
+    create_an_account
+  else
+    puts "\nInvalid response."
+    puts "Please enter yes or no."
+    login
+  end
+end
 
 def create_an_account
-  puts "Please enter a new username:"
+  puts "\nPlease enter a new username:"
   name = gets.strip
+
   if !Patient.find_by(name: name)
-  @patient = Patient.create(name: name)
-  @patient.save
-  puts "Hello, #{@patient.name.split(" ")[0]}"
-  puts "Please choose a password:"
-  password = gets.strip
-  @patient.password = password
-  @patient.save
-  puts "Thank you, would you like to run the program now? (y/n)"
-  choices_after_account_creation
+    @patient = Patient.create(name: name)
+    @patient.save
+    puts "\nHello, #{@patient.name.split(" ")[0]}"
+    puts "Please choose a password:"
+    password = gets.strip
+    @patient.password = password
+    @patient.save
+    puts "\nThank you! Would you like to run the program now? (y/n)"
+    choices_after_account_creation
   else
-    puts "That username is taken"
-    puts "You must choose a unique username"
+    puts "\nSorry, that username is taken."
+    puts "You must choose a unique username."
     create_an_account
   end
 
@@ -62,44 +70,45 @@ end
 
 def choices_after_account_creation
   open_or_not = gets.strip.downcase
+
   case open_or_not
   when "y", "yes"
     main_menu_methods
   when "n", "no"
-    puts "Thank you for creating an account. See you soon!"
+    puts "\nThank you for creating an account. See you soon!"
   else
-    puts "Invalid response:"
-    puts "please enter yes or no"
+    puts "\nInvalid response:"
+    puts "Please enter yes or no."
     choices_after_account_creation
   end
 end
 
 def password_authenticate
-  puts "Please enter your password:"
+  puts "\nPlease enter your password:"
   password = gets.strip
   if @patient.authenticate(password)
-    puts "Welcome #{@patient.name.split(" ")[0]}"
+    puts "\nWelcome #{@patient.name.split(" ")[0]}"
    main_menu_methods
   else
-    puts "The password you entered is incorrect"
+    puts "\nThe password you entered is incorrect"
     puts "Please choose one:"
-    puts "1: Try again"
-    puts "2: Create a new account"
+    puts "1. Try again"
+    puts "2. Create a new account"
 
     validate_password_response
   end
 end
 
 def validate_password_response
-    choice = gets.strip
+  choice = gets.strip
   case choice
-    when "1"
-      password_authenticate
-    when "2"
-      create_an_account
-    else
-      puts "Invalid response:"
-      puts "please enter 1 or 2"
-      validate_password_response
+  when "1"
+    password_authenticate
+  when "2"
+    create_an_account
+  else
+    puts "\nInvalid response:"
+    puts "Please enter 1 or 2."
+    validate_password_response
   end
 end

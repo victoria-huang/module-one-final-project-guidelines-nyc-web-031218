@@ -19,7 +19,7 @@ def main_menu_methods
     puts "\nGoodbye friend, thanks for checking in!"
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-5\n"
+    puts "Please enter a number from 1-5\n\n"
     sleep(1)
     main_menu_methods
   end

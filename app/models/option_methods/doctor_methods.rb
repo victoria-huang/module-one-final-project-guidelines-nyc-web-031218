@@ -7,13 +7,13 @@ def doctor_methods
   when "1"
     doctors = @patient.doctors.reload
     if doctors.length > 0
-      puts "These are your current doctors:"
+      puts "\nThese are your current doctors:"
       sleep(1)
       @patient.doctors.uniq.each_with_index{|doc, index| puts "\n#{index+1}. #{doc.name}\n";
       sleep(1)}
       doctor_methods
     else
-      puts "There are currently no doctors on file!"
+      puts "\nThere are currently no doctors on file!\n\n"
       sleep(1)
       doctor_methods
     end
@@ -21,7 +21,7 @@ def doctor_methods
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-2\n"
+    puts "Please enter a number from 1-2\n\n"
     sleep(1)
     doctor_methods
   end

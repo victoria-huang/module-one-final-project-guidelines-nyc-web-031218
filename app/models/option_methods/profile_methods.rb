@@ -16,7 +16,7 @@ def profile_methods
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-3\n"
+    puts "Please enter a number from 1-3\n\n"
     sleep(1)
     profile_methods
   end

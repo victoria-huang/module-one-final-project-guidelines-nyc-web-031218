@@ -24,7 +24,7 @@ def prescription_methods
         prescription_methods
       end
     else
-      puts "You currently have no prescriptions!"
+      puts "\nYou currently have no prescriptions!\n\n"
       sleep(1)
       prescription_methods
     end
@@ -36,7 +36,7 @@ def prescription_methods
     main_menu_methods
   else
     puts "\nSorry, that is an invalid response."
-    puts "Please enter a number from 1-6\n"
+    puts "Please enter a number from 1-6\n\n"
     sleep(1)
     prescription_methods
   end
@@ -84,7 +84,7 @@ def remove_prescription
         prescriptions.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
         sleep(1)}
       else
-        puts "You have no remaining prescriptions in our records\n"
+        puts "\nYou have no remaining prescriptions in our records\n"
       end
     else
       puts "\nThat prescription does not exist in your records\n\n"
@@ -93,7 +93,7 @@ def remove_prescription
     sleep(1)
     prescription_methods
   else
-    puts "You currently have no prescriptions!"
+    puts "\nYou currently have no prescriptions!\n\n"
     sleep(1)
     prescription_methods
   end
@@ -120,16 +120,16 @@ def edit_prescription(prescription)
 
     prescription.name = new_drug_name
     prescription.save
-    puts "Drug dosage and formulation updated!\n\n"
+    puts "\nDrug dosage and formulation updated!\n\n"
   when "2"
     puts "\nPlease enter new doctor name: \n\n"
     doctor_name = gets.strip
     new_doctor = Doctor.find_or_create_by(name: doctor_name)
     prescription.doctor = new_doctor
     prescription.save
-    puts "Doctor name updated!\n\n"
+    puts "\nDoctor name updated!\n\n"
   else
-    puts "Sorry, that is an invalid response."
+    puts "\nSorry, that is an invalid response."
     puts "Please enter a number from 1-2.\n\n"
     sleep(1)
     edit_prescription(prescription)
@@ -183,13 +183,13 @@ end
 def list_prescriptions
   prescriptions = @patient.prescriptions.reload.uniq
   if prescriptions.length > 0
-    puts "These are your current prescriptions:"
+    puts "\nThese are your current prescriptions:"
     sleep(1)
     @patient.prescriptions.uniq.each_with_index{|pres, index| puts "\n#{index+1}. #{pres.name}\n";
     sleep(1)}
     prescription_methods
   else
-    puts "You currently have no prescriptions!"
+    puts "\nYou currently have no prescriptions!\n\n"
     sleep(1)
     prescription_methods
   end
