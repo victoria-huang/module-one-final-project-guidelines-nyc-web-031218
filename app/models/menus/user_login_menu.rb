@@ -1,5 +1,6 @@
 require_relative '../../../config/environment'
 require_relative '../option_methods/main_menu_methods'
+require 'highline/import'
 
 def user_login_menu
   puts "Do you already have an account? (y/n)"
@@ -73,7 +74,8 @@ end
 
 def new_password_validate
   puts "You must include at least one: \nspecial character, upper case letter, lower case letter, AND integer"
-  password = gets.strip
+  password = (ask("") { |q| q.echo = "*" }).strip
+  # password = gets.strip
 
   if check_password_validity(password)
     @patient.password = password
@@ -120,8 +122,10 @@ def choices_after_account_creation
 end
 
 def password_authenticate
-  puts "\nPlease enter your password:"
-  password = gets.strip
+  # puts "\nPlease enter your password:"
+  password = (ask("Please enter your password:  ") { |q| q.echo = "*" }).strip
+  # password = gets.strip
+
   if @patient.authenticate(password)
     sleep(0.5)
     puts "\n\nWelcome #{@patient.name.split(" ")[0]}"

@@ -4,6 +4,7 @@
 # require 'nokogiri'
 require 'bundler'
 Bundler.require
+require 'highline/import'
 
 def check_string_integer(string)
   string.scan(/\D/).empty?

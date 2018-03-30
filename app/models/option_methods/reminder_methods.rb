@@ -62,7 +62,7 @@ def del_one_reminder_response(number)
   response = gets.strip.downcase
   case response
    when "yes", "y"
-     Reminder.delete(Reminder.all[number.to_i - 1].id)
+     @patient.reminders.delete(@patient.reminders[number.to_i - 1].id)
      sleep(0.5)
      puts "\nThank you, your reminder has been deleted.\n\n"
      continue?
@@ -93,7 +93,7 @@ def del_all_reminders_response
   response = gets.strip.downcase
   case response
   when "yes", "y"
-    Reminder.delete_all
+    @patient.reminders.delete_all
     sleep(1)
     puts "Thank you, your reminders have been deleted.\n\n"
     continue?

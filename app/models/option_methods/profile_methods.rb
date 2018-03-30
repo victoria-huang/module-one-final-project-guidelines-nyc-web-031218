@@ -1,6 +1,7 @@
 require_relative '../../../config/environment'
 require_relative 'main_menu_methods'
 require_relative '../menus/profile_menu'
+require 'highline/import'
 
 def profile_methods
   case profile_menu
@@ -20,7 +21,7 @@ end
 
 def check_to_change_password
   puts "\nPlease enter your current password:"
-  password = gets.strip
+  password = (ask("") { |q| q.echo = "*" }).strip
 
   if @patient.authenticate(password)
     change_password_validate
@@ -34,7 +35,7 @@ end
 def check_to_change_username
   puts "\nPlease enter your current password:"
 
-  password = gets.strip
+  password = (ask("") { |q| q.echo = "*" }).strip
   if @patient.authenticate(password)
     new_username_validate
   else
@@ -52,7 +53,7 @@ def change_password_validate
   puts "\nPlease enter a new password."
   puts "You must include at least one:"
   puts "special character, upper case letter, lower case letter, AND number\n\n"
-  new_password = gets.strip
+  new_password = (ask("") { |q| q.echo = "*" }).strip
 
   if check_password_valid(new_password)
     @patient.password = new_password
