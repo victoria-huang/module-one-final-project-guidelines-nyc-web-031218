@@ -6,7 +6,7 @@ gem "sinatra"
 gem "rake"
 gem "activerecord"
 gem "sinatra-activerecord"
-gem "sqlite3"
+gem 'sqlite3', '~> 1.3.6'
 gem "activerecord-suppress_range_error"
 gem "json"
 gem "nokogiri"
