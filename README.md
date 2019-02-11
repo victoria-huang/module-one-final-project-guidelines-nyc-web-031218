@@ -1,6 +1,8 @@
 ### Prescription Organizer Application ###
 Welcome to the Prescription Organizer App READMe!
 
+Video demo: https://youtu.be/IQ_5uKdeb_I
+
 This application will allow the user to easily store their prescriptions (name, dosage, doctor) and determine if there are any harmful drug interactions between their prescribed medications.
 The user can also add helpful reminders regarding their medical care using this application.
 Further details about the program's functionality are listed below.
