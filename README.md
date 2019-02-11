@@ -1,4 +1,4 @@
-### Prescription Organizer Application ###
+# Prescription Organizer Application
 Welcome to the Prescription Organizer App READMe!
 
 Video demo: https://youtu.be/IQ_5uKdeb_I
